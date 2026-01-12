@@ -1,0 +1,85 @@
+@import "tailwindcss";
+
+@theme {
+  /* Shop Palette ("Stenger Bike" - Tech/Sporty) */
+  --color-shop-primary: #E82525;
+  --color-shop-text: #111827;
+  --color-shop-subtext: #4B5563;
+  --color-shop-bg: #FFFFFF;
+  --color-shop-bg-secondary: #F3F4F6;
+
+  /* Travel Palette ("Adams & Butler" - Luxury/Earthy) */
+  --color-travel-primary: #1C1917;
+  --color-travel-accent: #A8A29E;
+  --color-travel-text: #292524;
+  --color-travel-bg: #FAFAF9;
+  --color-travel-cream: #F5F5F4;
+
+  /* Typography */
+  --font-sans: "Inter", ui-sans-serif, system-ui, sans-serif;
+  --font-serif: "Garamond", "Times New Roman", ui-serif, serif;
+
+  /* Custom Animations */
+  --animate-fade-in-up: fade-in-up 0.6s ease-out forwards;
+  --animate-reveal: reveal 1.2s cubic-bezier(0.77, 0, 0.175, 1) forwards;
+
+  @keyframes fade-in-up {
+    from {
+      opacity: 0;
+      transform: translateY(20px);
+    }
+
+    to {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }
+
+  @keyframes reveal {
+    from {
+      transform: scaleX(0);
+      transform-origin: left;
+    }
+
+    to {
+      transform: scaleX(1);
+      transform-origin: left;
+    }
+  }
+}
+
+:root {
+  --foreground-rgb: 0, 0, 0;
+  scroll-behavior: smooth;
+}
+
+body {
+  @apply bg-white antialiased text-stone-900;
+  color: rgb(var(--foreground-rgb));
+  overflow-x: hidden;
+}
+
+/* Custom Utilities */
+.glass-nav {
+  @apply backdrop-blur-md bg-white/70 border-b border-white/20 transition-all duration-300;
+}
+
+.text-reveal-container {
+  @apply relative overflow-hidden inline-block;
+}
+
+.text-reveal-overlay {
+  @apply absolute inset-0 bg-current scale-x-0 origin-left animate-reveal pointer-events-none;
+}
+
+.stagger-1 {
+  animation-delay: 100ms;
+}
+
+.stagger-2 {
+  animation-delay: 200ms;
+}
+
+.stagger-3 {
+  animation-delay: 300ms;
+}

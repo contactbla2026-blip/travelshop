@@ -1,0 +1,210 @@
+.cartPage {
+    min-height: 100vh;
+    padding: var(--spacing-3xl) 0;
+}
+
+.cartPage h1 {
+    margin-bottom: var(--spacing-2xl);
+}
+
+.cartLayout {
+    display: grid;
+    grid-template-columns: 1fr 400px;
+    gap: var(--spacing-xl);
+}
+
+.cartItems {
+    display: flex;
+    flex-direction: column;
+    gap: var(--spacing-md);
+}
+
+.cartItem {
+    display: grid;
+    grid-template-columns: 100px 1fr auto auto;
+    gap: var(--spacing-lg);
+    align-items: center;
+    padding: var(--spacing-lg);
+}
+
+.itemImage {
+    width: 100px;
+    height: 100px;
+    object-fit: cover;
+    border-radius: var(--radius-md);
+}
+
+.itemInfo h3 {
+    font-size: 1.125rem;
+    margin-bottom: var(--spacing-xs);
+    color: var(--color-text);
+}
+
+.itemPrice {
+    color: var(--color-text-secondary);
+    margin: 0;
+}
+
+.itemControls {
+    display: flex;
+    flex-direction: column;
+    gap: var(--spacing-sm);
+    align-items: center;
+}
+
+.quantityControls {
+    display: flex;
+    align-items: center;
+    gap: var(--spacing-sm);
+    background: var(--color-surface);
+    border-radius: var(--radius-md);
+    padding: var(--spacing-xs);
+}
+
+.quantityBtn {
+    width: 32px;
+    height: 32px;
+    background: var(--color-bg-secondary);
+    border: 1px solid var(--color-border);
+    border-radius: var(--radius-sm);
+    color: var(--color-text);
+    font-size: 1.125rem;
+    cursor: pointer;
+    transition: all var(--transition-base);
+}
+
+.quantityBtn:hover {
+    border-color: var(--color-primary);
+    background: rgba(160, 100, 255, 0.1);
+}
+
+.quantity {
+    min-width: 30px;
+    text-align: center;
+    font-weight: 600;
+    color: var(--color-text);
+}
+
+.removeBtn {
+    background: transparent;
+    border: none;
+    color: var(--color-error);
+    cursor: pointer;
+    font-size: 0.875rem;
+    transition: opacity var(--transition-fast);
+}
+
+.removeBtn:hover {
+    opacity: 0.7;
+}
+
+.itemTotal {
+    font-size: 1.5rem;
+    font-weight: 700;
+    background: var(--gradient-primary);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+    min-width: 100px;
+    text-align: right;
+}
+
+.cartSummary {
+    position: sticky;
+    top: 100px;
+    height: fit-content;
+}
+
+.summaryCard h3 {
+    margin-bottom: var(--spacing-lg);
+    color: var(--color-text);
+}
+
+.summaryRow {
+    display: flex;
+    justify-content: space-between;
+    padding: var(--spacing-md) 0;
+    color: var(--color-text-secondary);
+}
+
+.summaryTotal {
+    display: flex;
+    justify-content: space-between;
+    padding: var(--spacing-lg) 0;
+    margin: var(--spacing-md) 0;
+    border-top: 2px solid var(--color-border);
+    font-size: 1.25rem;
+    font-weight: 600;
+    color: var(--color-text);
+}
+
+.totalAmount {
+    font-size: 2rem;
+    font-weight: 700;
+    background: var(--gradient-primary);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+}
+
+.emptyCart {
+    min-height: calc(100vh - 200px);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: var(--spacing-3xl) var(--spacing-lg);
+}
+
+.emptyCard {
+    max-width: 500px;
+    text-align: center;
+    padding: var(--spacing-3xl);
+}
+
+.emptyIcon {
+    font-size: 5rem;
+    margin-bottom: var(--spacing-lg);
+    opacity: 0.5;
+}
+
+.emptyCard h2 {
+    margin-bottom: var(--spacing-md);
+}
+
+.emptyCard p {
+    margin-bottom: var(--spacing-xl);
+    color: var(--color-text-secondary);
+}
+
+@media (max-width: 968px) {
+    .cartLayout {
+        grid-template-columns: 1fr;
+    }
+
+    .cartItem {
+        grid-template-columns: 80px 1fr;
+        gap: var(--spacing-md);
+    }
+
+    .itemImage {
+        width: 80px;
+        height: 80px;
+    }
+
+    .itemControls {
+        grid-column: 1 / -1;
+        flex-direction: row;
+        justify-content: space-between;
+    }
+
+    .itemTotal {
+        grid-column: 1 / -1;
+        text-align: left;
+        font-size: 1.25rem;
+    }
+
+    .cartSummary {
+        position: relative;
+        top: 0;
+    }
+}

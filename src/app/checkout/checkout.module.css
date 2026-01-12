@@ -1,0 +1,129 @@
+.checkoutPage {
+    min-height: 100vh;
+    padding: var(--spacing-3xl) 0;
+}
+
+.checkoutPage h1 {
+    margin-bottom: var(--spacing-2xl);
+}
+
+.checkoutLayout {
+    display: grid;
+    grid-template-columns: 1fr 400px;
+    gap: var(--spacing-xl);
+}
+
+.checkoutForm {
+    display: flex;
+    flex-direction: column;
+    gap: var(--spacing-lg);
+}
+
+.checkoutForm h3 {
+    margin-bottom: var(--spacing-md);
+    color: var(--color-text);
+}
+
+.orderItems {
+    display: flex;
+    flex-direction: column;
+    gap: var(--spacing-sm);
+}
+
+.orderItem {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: var(--spacing-sm) 0;
+    border-bottom: 1px solid var(--color-border);
+}
+
+.orderItem:last-child {
+    border-bottom: none;
+}
+
+.itemInfo {
+    display: flex;
+    align-items: center;
+    gap: var(--spacing-md);
+}
+
+.itemName {
+    color: var(--color-text);
+}
+
+.itemQty {
+    color: var(--color-text-tertiary);
+    font-size: 0.875rem;
+}
+
+.itemPrice {
+    font-weight: 600;
+    color: var(--color-text);
+}
+
+.note {
+    color: var(--color-text-secondary);
+    font-size: 0.875rem;
+    margin: 0;
+    padding: var(--spacing-md);
+    background: rgba(100, 150, 255, 0.1);
+    border-radius: var(--radius-md);
+    border: 1px solid rgba(100, 150, 255, 0.2);
+}
+
+.orderSummary {
+    position: sticky;
+    top: 100px;
+    height: fit-content;
+}
+
+.summaryCard h3 {
+    margin-bottom: var(--spacing-lg);
+    color: var(--color-text);
+}
+
+.summaryRow {
+    display: flex;
+    justify-content: space-between;
+    padding: var(--spacing-md) 0;
+    color: var(--color-text-secondary);
+}
+
+.summaryTotal {
+    display: flex;
+    justify-content: space-between;
+    padding: var(--spacing-lg) 0;
+    margin: var(--spacing-md) 0;
+    border-top: 2px solid var(--color-border);
+    font-size: 1.25rem;
+    font-weight: 600;
+    color: var(--color-text);
+}
+
+.totalAmount {
+    font-size: 2rem;
+    font-weight: 700;
+    background: var(--gradient-primary);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+}
+
+.disclaimer {
+    margin-top: var(--spacing-md);
+    font-size: 0.75rem;
+    color: var(--color-text-tertiary);
+    text-align: center;
+}
+
+@media (max-width: 968px) {
+    .checkoutLayout {
+        grid-template-columns: 1fr;
+    }
+
+    .orderSummary {
+        position: relative;
+        top: 0;
+    }
+}

@@ -1,0 +1,114 @@
+// This is your Prisma schema file,
+// learn more about it in the docs: https://pris.ly/d/prisma-schema
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "sqlite"
+  url      = env("DATABASE_URL")
+}
+
+// SQLite doesn't support Enums, so we use Strings
+// UserRole: USER, ADMIN
+// BookingStatus: PENDING, CONFIRMED, CANCELLED
+// OrderStatus: PENDING, CONFIRMED, SHIPPED, DELIVERED, CANCELLED
+// PaymentStatus: PENDING, COMPLETED, FAILED, REFUNDED
+// PaymentType: BOOKING, ORDER
+
+model User {
+  id        String   @id @default(cuid())
+  email     String   @unique
+  password  String
+  name      String?
+  role      String   @default("USER") // Was Enum UserRole
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  bookings Booking[]
+  orders   Order[]
+}
+
+model TravelListing {
+  id          String   @id @default(cuid())
+  title       String
+  description String   // Was @db.Text, SQLite uses simple String
+  images      String   // Was String[]. Store as JSON string or comma-separated
+  price       Float
+  location    String?
+  duration    String?
+  // Availability stored as JSON string: '{ "2024-01-15": true }'
+  availability String  @default("{}") // Was Json
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @updatedAt
+
+  bookings Booking[]
+}
+
+model Booking {
+  id               String        @id @default(cuid())
+  userId           String
+  travelListingId  String
+  bookingDate      DateTime
+  totalAmount      Float
+  status           String        @default("PENDING") // Was Enum BookingStatus
+  createdAt        DateTime      @default(now())
+  updatedAt        DateTime      @updatedAt
+
+  user          User          @relation(fields: [userId], references: [id])
+  travelListing TravelListing @relation(fields: [travelListingId], references: [id])
+  payment       Payment?
+}
+
+model Product {
+  id          String   @id @default(cuid())
+  title       String
+  description String   // Was @db.Text
+  images      String   // Was String[]
+  price       Float
+  inventory   Int      @default(0)
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @updatedAt
+
+  orderItems OrderItem[]
+}
+
+model Order {
+  id          String      @id @default(cuid())
+  userId      String
+  totalAmount Float
+  status      String      @default("PENDING") // Was Enum OrderStatus
+  createdAt   DateTime    @default(now())
+  updatedAt   DateTime    @updatedAt
+
+  user       User        @relation(fields: [userId], references: [id])
+  orderItems OrderItem[]
+  payment    Payment?
+}
+
+model OrderItem {
+  id        String @id @default(cuid())
+  orderId   String
+  productId String
+  quantity  Int
+  price     Float
+
+  order   Order   @relation(fields: [orderId], references: [id], onDelete: Cascade)
+  product Product @relation(fields: [productId], references: [id])
+}
+
+model Payment {
+  id              String        @id @default(cuid())
+  stripePaymentId String        @unique
+  amount          Float
+  status          String        @default("PENDING") // Was Enum PaymentStatus
+  type            String        // Was Enum PaymentType
+  bookingId       String?       @unique
+  orderId         String?       @unique
+  createdAt       DateTime      @default(now())
+  updatedAt       DateTime      @updatedAt
+
+  booking Booking? @relation(fields: [bookingId], references: [id])
+  order   Order?   @relation(fields: [orderId], references: [id])
+}
