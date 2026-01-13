@@ -4,12 +4,16 @@ import { HugeiconsIcon } from '@hugeicons/react'
 import { PackageIcon } from '@hugeicons/core-free-icons'
 
 async function getProducts() {
+    console.log('[Diagnostic] Fetching products in ShopPage...')
+    console.log('[Diagnostic] DATABASE_URL exists:', !!process.env.DATABASE_URL)
+
     try {
         const products = await prisma.product.findMany({
             orderBy: {
                 createdAt: 'desc',
             },
         })
+        console.log(`[Diagnostic] Successfully fetched ${products.length} products`)
         return products.map((product: any) => ({
             ...product,
             images: JSON.parse(product.images || '[]'),

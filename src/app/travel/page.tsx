@@ -2,12 +2,16 @@ import { prisma } from '@/lib/prisma'
 import ListingList from '@/components/travel/ListingList'
 
 async function getTravelListings() {
+    console.log('[Diagnostic] Fetching travel listings in TravelPage...')
+    console.log('[Diagnostic] DATABASE_URL exists:', !!process.env.DATABASE_URL)
+
     try {
         const listings = await prisma.travelListing.findMany({
             orderBy: {
                 createdAt: 'desc',
             },
         })
+        console.log(`[Diagnostic] Successfully fetched ${listings.length} travel listings`)
         return listings.map((listing: any) => ({
             ...listing,
             images: JSON.parse(listing.images || '[]'),
